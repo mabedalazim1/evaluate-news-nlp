@@ -23,11 +23,11 @@ console.log(__dirname)
 const baseUrl = 'https://api.meaningcloud.com/sentiment-2.1?'
 const apiKey = process.env.API_KEY
 console.log(apiKey)
-let inputData = ['https://github.com/mabedalazim1/evaluate-news-nlp']
+let inputData = ['']
 
 app.get('/',  (req, res)=> {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+     res.sendFile('dist/index.html')
+    //res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 app.get('/test',  (req, res)=> {
@@ -35,8 +35,8 @@ app.get('/test',  (req, res)=> {
 })
 
 //Post Api
-app.post('/api', async (res, req) => {
-    //inputData = req.body.url
+app.post('/api', async (req, res) => {
+    inputData = req.body.url
     console.log(`You entered: ${inputData}`)
     const nlpApiURL = `${baseUrl}key=${apiKey}&url=${inputData}&lang=en`
     const response = await fetch(nlpApiURL)
@@ -46,6 +46,6 @@ app.post('/api', async (res, req) => {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8082,  () => {
-    console.log('Example app listening on port 8082!')
+app.listen(8081,  () => {
+    console.log('Example app listening on port 8081!')
 })

@@ -2,15 +2,38 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
+    let formText = document.getElementById('url').value
+    if (Client.checkURL(formText)) {
+        console.log("::: Form Submitted :::")
+        console.log("::: URL :::",formText )
 
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
+        postApi('http://localhost:8081/api', {url: formText})
+        .then( (res)=> {
+        document.getElementById('results').innerHTML = `Agreement: ${res.agreement}`
     })
-}
+    } else {
+        alert('Sorry, the URL is incorrect. Please try a valid URL.');
+    }
 
+    
+}
+const postApi = async (url = "", data = {}) => {
+    console.log('Respones:', data)
+    const res = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    try {
+        const apiData = await res.json()
+        console.log('Data received:', apiData)
+        return apiData
+    } catch (err) {
+        console.log('error', err)
+    }
+}
 export { handleSubmit }
