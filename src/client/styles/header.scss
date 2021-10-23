@@ -3,3 +3,17 @@ header {
     justify-content: space-between;
     padding: 10px 40px;
 }
+.heder-con{
+    display: flex;
+    justify-content:center;
+
+    .logo-img{
+        width: 25px;
+    }
+    p{
+        margin: 5px 10px;
+        color: rgb(4, 95, 95);
+        font-weight: bold;
+        font-size: 20px;
+    }
+}

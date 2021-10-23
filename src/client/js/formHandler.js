@@ -10,7 +10,6 @@ const ironyText = document.getElementById('irony')
 const loader = document.getElementById('loader')
 let iputUrl = document.getElementById('url')
 const submitBtn = document.getElementById('submitBtn')
-loader.style.display = 'none'
 
 function handleSubmit (event) {
     event.preventDefault()
@@ -31,35 +30,35 @@ function handleSubmit (event) {
       })
   } else {
     alert('Sorry, the URL is incorrect. Please try a valid URL.')
-    conDiv.style.display = 'none'
-    loader.style.display = 'none'
+      conDiv.style.display = 'none'
+      loader.style.display = 'none'
       submitBtn.disabled = false
       iputUrl.disabled= false
-    iputUrl.value = ''
+      iputUrl.value = ''
   }
 }
 const showResult = () => {
-  conDiv.style.display = 'block'
-  loader.style.display = 'none'
+    conDiv.style.display = 'block'
+    loader.style.display = 'none'
     submitBtn.disabled = false
     iputUrl.disabled= false
 }
 const postApi = async (url = '', data = {}) => {
   const res = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    mode: 'cors',
-    headers: {
+      method: 'POST',
+      credentials: 'same-origin',
+      mode: 'cors',
+      headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+      body: JSON.stringify(data)
   })
   try {
-    const apiData = await res.json()
-    console.log('Data received:', apiData)
-    return apiData
+      const apiData = await res.json()
+      console.log('Data received:', apiData)
+      return apiData
   } catch (err) {
-    console.log('error', err)
+      console.log('error', err)
   }
 }
 const editScoreTag = score => {
@@ -117,3 +116,4 @@ const capitalizeFirst = str => {
 }
 
 export { handleSubmit }
+export { editScoreTag }
