@@ -19,12 +19,6 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
-// Const Api var
-const baseUrl = 'https://api.meaningcloud.com/sentiment-2.1?'
-const apiKey = process.env.API_KEY
-console.log(apiKey)
-let inputData = ['']
-
 app.get('/',  (req, res)=> {
      res.sendFile('dist/index.html')
     //res.sendFile(path.resolve('src/client/views/index.html'))
@@ -34,15 +28,24 @@ app.get('/test',  (req, res)=> {
     res.send(mockAPIResponse)
 })
 
+// Const Api Vars
+const baseUrl = 'https://api.meaningcloud.com/sentiment-2.1?'
+const apiKey = process.env.API_KEY
+let inputData = ['']
+
 //Post Api
 app.post('/api', async (req, res) => {
     inputData = req.body.url
-    console.log(`You entered: ${inputData}`)
-    const nlpApiURL = `${baseUrl}key=${apiKey}&url=${inputData}&lang=en`
+    const nlpApiURL = `${baseUrl}key=${apiKey}&url=${inputData}&lang=auto`
     const response = await fetch(nlpApiURL)
-    const data = await response.json()
-    console.log(data)
-    res.send(data)
+    try {
+        const data = await response.json()
+            res.send(data)
+            console.log(data)
+    }
+    catch (err){
+        console.log("Error", err);
+    }
 })
 
 // designates what port the app will listen to for incoming requests

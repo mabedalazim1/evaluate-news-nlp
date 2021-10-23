@@ -18,15 +18,25 @@
 
         <main>
             <section>
-                <form class="" onsubmit="return Client.handleSubmit(event)">
+                <form class="con-form" onsubmit="return Client.handleSubmit(event)">
                     <input id="url" type="text" name="input" value=""  placeholder="Enter URL">
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+                    <input id ="submitBtn"type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             </section>
 
             <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
+<div id="loader"></div>
+
+<div id="results" style="display:none;" id="myDiv" class="animate-bottom">
+  <h2 id="evluat_title"></h2>
+  <p id="error"></p>
+  <p id="score"></p>
+  <p id="agreement"></p>
+  <p id="subjectivity"></p>
+  <p id="confidence"></p>
+  <p id="irony"></p>
+</div>
+
             </section>
         </main>
 
