@@ -17,16 +17,22 @@ function handleSubmit (event) {
     submitBtn.disabled = true
     iputUrl.disabled= true
   // check what text was put into the form field
-  if (Client.checkURL(iputUrl.value)) {
-    loader.style.display = 'block'
-    console.log('::: Form Submitted :::')
-    postApi('http://localhost:8081/api', { url: iputUrl.value })
+  try {
+    if (Client.checkURL(iputUrl.value)) {
+      loader.style.display = 'block'
+      console.log('::: Form Submitted :::')
+      postApi('http://localhost:8081/api', { url: iputUrl.value })
       .then(res => {
           updateUI(res)
       })
       .then(() => {
         iputUrl.value = ''
         showResult()
+      }).catch((err) => {
+        console.log(err)
+        showResult(true)
+        errorText.classList.add('error')
+        errorText.innerHTML = 'There is no connection with server .. Please check your internet access.'
       })
   } else {
     alert('Sorry, the URL is incorrect. Please try a valid URL.')
@@ -36,15 +42,15 @@ function handleSubmit (event) {
       iputUrl.disabled= false
       iputUrl.value = ''
   }
+    }
+    catch(err) {
+      console.log(err)
+    }
 }
-const showResult = () => {
-    conDiv.style.display = 'block'
-    loader.style.display = 'none'
-    submitBtn.disabled = false
-    iputUrl.disabled= false
-}
+
 const postApi = async (url = '', data = {}) => {
-  const res = await fetch(url, {
+  try {
+    const res = await fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
       mode: 'cors',
@@ -59,6 +65,10 @@ const postApi = async (url = '', data = {}) => {
       return apiData
   } catch (err) {
       console.log('error', err)
+  }
+  }
+  catch (err) {
+    console.log('error', err)
   }
 }
 const editScoreTag = score => {
@@ -103,13 +113,27 @@ const updateUI = res => {
     ironyText.innerHTML = `Irony: ${capitalizeFirst(res.irony)}`
   } else {
     errorText.classList.add('error')
-    errorText.innerHTML = 'Ther is no valid content to analyze on this page'
+    errorText.innerHTML = 'There is no valid content to analyze on this page'
+    delOldData()
+  }
+}
+
+const showResult = (err = false) => {
+  conDiv.style.display = 'block'
+  loader.style.display = 'none'
+  submitBtn.disabled = false
+  iputUrl.disabled = false
+  if (err) {
+    delOldData()
+  }
+}
+
+const delOldData = () => {
     scoreText.innerHTML = ''
     agreementText.innerHTML = ''
     subjectivityText.innerHTML = ''
     confidenceText.innerHTML = ''
     ironyText.innerHTML = ''
-  }
 }
 // Capitalize first letter
 const capitalizeFirst = str => {
