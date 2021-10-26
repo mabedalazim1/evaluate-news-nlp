@@ -1,52 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-    </head>
-
-    <body>
-
-        <header>
-<div class="heder-con">
-  <img class="logo-img" src="../img/brainstorm-skill.png" />
-  <p>nlp <span>sentiment analyze</span></p>
-</div>
-
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
-
-        <main>
-            <section>
-                <form class="con-form" onsubmit="return Client.handleSubmit(event)">
-                    <input id="url" type="text" name="input" value=""  placeholder="Enter URL">
-                    <input id ="submitBtn"type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-            </section>
-
-            <section>
-<div id="loader" style="display:none;"></div>
-
-
-<div id="results" style="display:none;" id="myDiv" class="animate-bottom">
-  <h2 id="evluat_title"></h2>
-  <p id="error"></p>
-  <p id="score"></p>
-  <p id="agreement"></p>
-  <p id="subjectivity"></p>
-  <p id="confidence"></p>
-  <p id="irony"></p>
-</div>
-
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <title>NLP</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-con">
+        <img class="logo-img" src="../img/logo.png" /> 
+      </div>
+        <div class="nav">
+          <a href="https://www.facebook.com/mabedelazim" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/mohamed-abedalazim-36b95634/" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/mabedalazim1" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+      </div>
+    </header>
+    <main>
+      <section class="submit-section">
+        <form class="con-form" onsubmit="return Client.handleSubmit(event)">
+          <p>Type a URL of an article or a blog.</p>
+          <input
+            id="url"
+            type="text"
+            name="input"
+            value=""
+            placeholder="Enter URL"
+          />
+          <input class="submit-btn"
+            id="submitBtn"
+            type="submit"
+            name=""
+            value="submit"
+            onclick="return Client.handleSubmit(event)"
+            onsubmit="return Client.handleSubmit(event)"
+          />
+        </form>
+      </section>
+      <section class="results">
+        <div id="loader" style="display:none;"></div>
+        <div
+          id="results"
+          style="display:none;"
+          id="myDiv"
+          class="results-div"
+        >
+          <h2 id="evluat_title"></h2>
+          <p id="error" class="error"></p>
+          <p id="score"></p>
+          <p id="agreement"></p>
+          <p id="subjectivity"></p>
+          <p id="confidence"></p>
+          <p id="irony"></p>
+        </div>
+      </section>
+    </main>
+    <footer class="foter-con">
+      <p>NLP project for udacity</p>
+      <p class="copy-right">By Mohamed Abdalazim © 2021</p>
+    </footer>
+    <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+        })
+      }
+    </script>
+  </body>
 </html>

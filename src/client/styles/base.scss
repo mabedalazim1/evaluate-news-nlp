@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #eff8e5;
 }
 
 main {
@@ -10,5 +11,5 @@ main {
 
 section {
     max-width: 800px;
-    margin: 50px auto;
+    margin: 50px auto 20px;
 }

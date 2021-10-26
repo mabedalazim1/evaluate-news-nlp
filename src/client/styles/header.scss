@@ -2,18 +2,20 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 10px 40px;
+    
+    .nav i{
+        padding-top: 30px;
+        padding-right: 5px;
+    }
+    a{
+        text-decoration: none;
+    }
 }
-.heder-con{
+.header-con{
     display: flex;
     justify-content:center;
-
+    
     .logo-img{
-        width: 25px;
-    }
-    p{
-        margin: 5px 10px;
-        color: rgb(4, 95, 95);
-        font-weight: bold;
-        font-size: 20px;
+        width: 100px;
     }
 }

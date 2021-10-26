@@ -22,7 +22,7 @@ function handleSubmit (event) {
     console.log('::: Form Submitted :::')
     postApi('http://localhost:8081/api', { url: iputUrl.value })
       .then(res => {
-        updateUI(res)
+          updateUI(res)
       })
       .then(() => {
         iputUrl.value = ''
@@ -93,6 +93,7 @@ const updateUI = res => {
   let msg = res.status.msg
   // Check page content
   if (msg === 'OK') {
+    errorText.classList.remove('error')
     scoreText.innerHTML = `Sentiment Score: ${editScoreTag(res.score_tag)}`
     agreementText.innerHTML = `Agreement: ${capitalizeFirst(res.agreement)}`
     subjectivityText.innerHTML = `Subjectivity: ${capitalizeFirst(
@@ -101,6 +102,7 @@ const updateUI = res => {
     confidenceText.innerHTML = `Confidence: ${res.confidence}`
     ironyText.innerHTML = `Irony: ${capitalizeFirst(res.irony)}`
   } else {
+    errorText.classList.add('error')
     errorText.innerHTML = 'Ther is no valid content to analyze on this page'
     scoreText.innerHTML = ''
     agreementText.innerHTML = ''
